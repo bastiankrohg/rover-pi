@@ -4,7 +4,7 @@ import signal
 import sys
 import rover
 import rover_protos.mars_rover_pb2
-import rover_protos.mars_rover_pb2_grpc
+from rover_protos import mars_rover_pb2_grpc
 
 
 class Pi(mars_rover_pb2_grpc.RoverServiceServicer):
