@@ -3,8 +3,8 @@ from concurrent import futures
 import signal
 import sys
 import rover
-import mars_rover_pb2
-import mars_rover_pb2_grpc
+import rover_protos.mars_rover_pb2
+import rover_protos.mars_rover_pb2_grpc
 
 
 class Pi(mars_rover_pb2_grpc.RoverServiceServicer):
