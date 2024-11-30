@@ -1,4 +1,0 @@
-grpcio==1.68.0
-protobuf==5.29.0
-protos==0.1.0
-rover==1.1.0
