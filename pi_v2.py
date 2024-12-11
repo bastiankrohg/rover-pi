@@ -130,8 +130,8 @@ def serve():
     print("[DEBUG] Starting Pi gRPC server...")
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     mars_rover_pb2_grpc.add_RoverServiceServicer_to_server(Pi(), server)
-    server.add_insecure_port('[::]:50051')
-    print("[DEBUG] Pi gRPC server started and listening on port 50051")
+    server.add_insecure_port('[::]:50052')
+    print("[DEBUG] Pi gRPC server started and listening on port 50052")
 
     # Graceful shutdown on Ctrl+C
     def signal_handler(sig, frame):
