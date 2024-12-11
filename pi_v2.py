@@ -46,7 +46,7 @@ class Pi(mars_rover_pb2_grpc.RoverServiceServicer):
             success=True, message=f"Turning right at angle {angle}"
         )
 
-    def RotateOnSpot(self, request, context):
+    def TurnOnSpot(self, request, context):
         angle = request.angle
         print(f"[DEBUG] RotateOnSpot called with angle={angle}")
         rover.spinLeft(angle) if angle > 0 else rover.spinRight(-angle)
