@@ -386,14 +386,31 @@ def moveDistance(distance_cm, speed=DEFAULT_SPEED):
     else:
         stepReverse(speed, steps) # need - in front of steps here?
 
-def turnByAngle(angle_deg, speed=DEFAULT_SPEED):
-    """TODO LG Calibration - Turn left or right by a specified angle."""
+def spinAngle(angle_deg, speed=DEFAULT_SPEED):
+    """TODO LG Calibration - Spin left or right by a specified angle."""
     steps = int(abs(angle_deg) * ANGLE_STEP_FACTOR)
     if angle_deg > 0:
         stepSpinR(speed, steps)
     else:
         stepSpinL(speed, steps)
 
+def turnForwardAngle(angle_deg, speed=DEFAULT_SPEED):
+    """TODO LG Calibration - Turn left or right by a specified angle."""
+    # Need left speed & right speed
+    steps = int(abs(angle_deg) * ANGLE_STEP_FACTOR)
+    if angle_deg > 0:
+        stepSpinR(speed, steps)
+    else:
+        stepSpinL(speed, steps)
+
+def turnReverseAngle(angle_deg, speed=DEFAULT_SPEED):
+    """TODO LG Calibration - Turn left or right by a specified angle."""
+    # Need left speed & right speed
+    steps = int(abs(angle_deg) * ANGLE_STEP_FACTOR)
+    if angle_deg > 0:
+        stepSpinR(speed, steps)
+    else:
+        stepSpinL(speed, steps)
 
 # End of Wheel Sensor Functions
 #======================================================================

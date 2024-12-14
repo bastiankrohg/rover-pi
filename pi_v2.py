@@ -50,7 +50,7 @@ class Pi(mars_rover_pb2_grpc.RoverServiceServicer):
         angle = request.angle
         speed = request.speed
         print(f"[DEBUG] TurnAngle called with angle={angle}, speed={speed}")
-        rover.turnByAngle(speed, angle)
+        rover.turnAngle(speed, angle)
         return mars_rover_pb2.CommandResponse(
             success=True, message=f"Turned {angle} degrees at speed {speed}"
         )
