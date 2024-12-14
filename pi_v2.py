@@ -30,6 +30,31 @@ class Pi(mars_rover_pb2_grpc.RoverServiceServicer):
             success=True, message=f"Reversing at speed {speed}"
         )
 
+    def MoveDistance(self, request, context):
+        distance = request.distance
+        speed = request.speed
+        print(f"[DEBUG] MoveDistance called with distance={distance}, speed={speed}")
+        rover.moveDistance(speed, distance)
+        return mars_rover_pb2.CommandResponse(
+            success=True, message=f"Moved {distance} cm at speed {speed}"
+        )
+
+    def Brake(self, request, context):
+        print("[DEBUG] Brake called")
+        rover.brake()
+        return mars_rover_pb2.CommandResponse(
+            success=True, message="Rover braking activated"
+        )
+
+    def TurnAngle(self, request, context):
+        angle = request.angle
+        speed = request.speed
+        print(f"[DEBUG] TurnAngle called with angle={angle}, speed={speed}")
+        rover.turnByAngle(speed, angle)
+        return mars_rover_pb2.CommandResponse(
+            success=True, message=f"Turned {angle} degrees at speed {speed}"
+        )
+
     def TurnLeft(self, request, context):
         angle = request.angle
         print(f"[DEBUG] TurnLeft called with angle={angle}")
