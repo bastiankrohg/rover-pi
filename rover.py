@@ -81,6 +81,8 @@ from rpi_ws281x import *
 import pca9685
 import smbus
 
+from calibration import DISTANCE_STEP_FACTOR, ANGLE_STEP_FACTOR, DEFAULT_SPEED
+
 # Define Model
 PGNone = 0
 PGFull = 1
@@ -375,6 +377,22 @@ def stepSpinR(speed, counts):
     spinRight(speed)
     while (targetL != -1) or (targetR != -1):
         time.sleep(0.002)
+
+def moveDistance(distance_cm, speed=DEFAULT_SPEED):
+    """TODO LG Calibration - Move forward or backward for a specified distance."""
+    steps = int(distance_cm * DISTANCE_STEP_FACTOR)
+    if distance_cm > 0:
+        stepForward(speed, steps)
+    else:
+        stepReverse(speed, steps) # need - in front of steps here?
+
+def turnByAngle(angle_deg, speed=DEFAULT_SPEED):
+    """TODO LG Calibration - Turn left or right by a specified angle."""
+    steps = int(abs(angle_deg) * ANGLE_STEP_FACTOR)
+    if angle_deg > 0:
+        stepSpinR(speed, steps)
+    else:
+        stepSpinL(speed, steps)
 
 
 # End of Wheel Sensor Functions
