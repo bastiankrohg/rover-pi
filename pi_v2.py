@@ -46,13 +46,40 @@ class Pi(mars_rover_pb2_grpc.RoverServiceServicer):
             success=True, message="Rover braking activated"
         )
 
-    def TurnAngle(self, request, context):
+    def SpinAngle(self, request, context):
+        angle = request.angle
+        print(f"[DEBUG] SpinAngle called with angle={angle}")
+        speed = 60  # Default speed for spinning
+        if angle > 0:
+            rover.stepSpinR(speed, abs(angle))  # Spin right
+        else:
+            rover.stepSpinL(speed, abs(angle))  # Spin left
+        return mars_rover_pb2.CommandResponse(
+            success=True, message=f"Spun {'right' if angle > 0 else 'left'} by {abs(angle)} degrees"
+        )
+
+    def TurnAngleForward(self, request, context):
         angle = request.angle
         speed = request.speed
-        print(f"[DEBUG] TurnAngle called with angle={angle}, speed={speed}")
-        rover.turnAngle(speed, angle)
+        print(f"[DEBUG] TurnAngleForward called with angle={angle}, speed={speed}")
+        if angle > 0:
+            rover.turnForward(speed, speed - (angle / 10))  # Example arc calculation
+        else:
+            rover.turnForward(speed - (abs(angle) / 10), speed)  # Adjust left/right speeds
         return mars_rover_pb2.CommandResponse(
-            success=True, message=f"Turned {angle} degrees at speed {speed}"
+            success=True, message=f"Turned forward by {angle} degrees at speed {speed}"
+        )
+
+    def TurnAngleBackward(self, request, context):
+        angle = request.angle
+        speed = request.speed
+        print(f"[DEBUG] TurnAngleBackward called with angle={angle}, speed={speed}")
+        if angle > 0:
+            rover.turnReverse(speed, speed - (angle / 10))  # Example arc calculation
+        else:
+            rover.turnReverse(speed - (abs(angle) / 10), speed)  # Adjust left/right speeds
+        return mars_rover_pb2.CommandResponse(
+            success=True, message=f"Turned backward by {angle} degrees at speed {speed}"
         )
 
     def TurnLeft(self, request, context):
